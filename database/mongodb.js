@@ -11,7 +11,7 @@ const conectToDatabase = async () => {
         console.log('MongoDB Connected');
     }
     catch(err){
-        console.log("MONGO_URI:", process.env.MONGO_URI);
+        console.log("MONGO_URI:", process.env.DB_URI);
 
         console.error('Error connecting to database ',err);
         process.exit(1);
