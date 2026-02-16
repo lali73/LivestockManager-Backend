@@ -1,20 +1,22 @@
-import Backup from "../models/Backup.js";
+import { Backup } from "../models/Backup.js";
 
+// Save backup
 export const saveBackup = async (req, res) => {
     try {
         const backup = new Backup({ data: req.body });
         await backup.save();
-        res.status(200).json({ message: "Backup saved" });
-    } catch (error) {
-        res.status(500).json({ error: error.message });
+        res.status(201).json(backup);
+    } catch (err) {
+        res.status(400).json({ error: err.message });
     }
 };
 
+// Get latest backup
 export const getLatestBackup = async (req, res) => {
     try {
         const backup = await Backup.findOne().sort({ createdAt: -1 });
         res.json(backup);
-    } catch (error) {
-        res.status(500).json({ error: error.message });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
     }
 };
